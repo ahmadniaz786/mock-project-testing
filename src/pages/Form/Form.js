@@ -10,10 +10,7 @@ import {
   Skeleton,
   Grid,
 } from "@mui/material";
-import Step1 from "./components/Step1/Step1";
-import Step2 from "./components/Step2/Step2";
-import Step3 from "./components/Step3/Step3";
-import Step4 from "./components/Step4/Step4";
+import { Step1, Step2, Step3, Step4, FormHeader } from "./components";
 
 import StepConnector, {
   stepConnectorClasses,
@@ -253,6 +250,14 @@ const DataForm = () => {
                   />
                 ) : (
                   <Box>
+                    <FormHeader
+                      loading={loading}
+                      handleBack={prev}
+                      handleNext={next}
+                      activeStep={activeStep}
+                      title={stepsArray[activeStep].label}
+                      steps={stepsArray}
+                    />
                     {activeForm &&
                       React.createElement(getComponentName(), {
                         activeStep: activeStep,
