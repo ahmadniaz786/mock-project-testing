@@ -32,6 +32,18 @@ const Step1 = (props) => {
     },
   });
 
+  const countryOptions = [
+    { label: "Pakistan", value: "Pakistan" },
+    { label: "India", value: "India" },
+    { label: "England", value: "England" },
+    { label: "USA", value: "USA" },
+  ];
+  const degreeOptions = [
+    { label: "Bachelor", value: "Bachelor" },
+    { label: "Master", value: "Master" },
+    { label: "PHD", value: "PHD" },
+  ];
+
   return (
     <Box sx={{ background: "white", p: 3 }}>
       <Box sx={{ p: 2, pt: 3, pointerEvents: submitLoading ? "none" : "auto" }}>
@@ -65,6 +77,7 @@ const Step1 = (props) => {
                 formik={formik}
                 loading={loading}
                 label="Country"
+                options={countryOptions}
                 required
               />
             </Grid2>
@@ -75,8 +88,8 @@ const Step1 = (props) => {
                 formik={formik}
                 loading={loading}
                 label="Degree"
-
-                // disabled={disableForm}
+                options={degreeOptions}
+                required
               />
             </Grid2>
           </Grid2>

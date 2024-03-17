@@ -6,7 +6,14 @@ import React from "react";
 //   FormControl,
 //   Skeleton,
 // } from "src/shared/material";
-import { Autocomplete, TextField, FormControl, Skeleton } from "@mui/material";
+import {
+  Autocomplete,
+  TextField,
+  FormControl,
+  Skeleton,
+  Box,
+  Typography,
+} from "@mui/material";
 
 import { useState } from "react";
 
@@ -14,24 +21,23 @@ import { useEffect } from "react";
 
 const AutoCompleteField = ({
   formik,
-
   name,
-
   label,
-
   onChange,
-
+  options,
   required,
   loading,
 }) => {
   const [idTypes, setIdTypes] = useState([]);
 
-  const [defaultValue, setDefaultValue] = useState(null);
+  const [defaultValue, setDefaultValue] = useState("Select a Country");
 
   useEffect(() => {
     if ((name && !defaultValue) || formik.values[name] === "")
       setDefaultValue(formik.values[name]);
   }, [formik, name]);
+
+  console.log(options, "OPT");
 
   return (
     <>
@@ -45,42 +51,37 @@ const AutoCompleteField = ({
           sx={{ pointerEvents: "auto" }}
         >
           <Autocomplete
-            data-testid="content-autocomplete"
-            loading={true}
-            fullWidth
-            name={name}
-            size="small"
-            options={idTypes}
-            value={defaultValue ? { Value: defaultValue } : null}
-            getOptionLabel={(item) => (item?.Value ? item?.Value : "")}
-            isOptionEqualToValue={(option, value) =>
-              option.Value === value.Value
-            }
+            id={name}
+            options={options}
+            getOptionLabel={(option) => option.label} // Specify how to extract the label
+            value={defaultValue}
+            onChange={(e, val) => {
+              formik?.setFieldValue(name, val ? val.value : ""); // Adjust for the case when value is null
+            }}
+            renderOption={(props, option) => (
+              <Box
+                display="flex"
+                component="li"
+                flexDirection="row"
+                alignItems="center"
+                {...props}
+              >
+                <Typography variant="body2">{option.label}</Typography>
+              </Box>
+            )}
             renderInput={(params) => (
               <TextField
                 {...params}
-                fullWidth
-                error={Boolean(formik?.touched[name] && formik?.errors[name])}
-                value={params.Name}
+                name={name}
                 label={label}
-                required={required}
                 variant="outlined"
-                helperText={formik?.touched[name] && formik?.errors[name]}
+                fullWidth
+                inputProps={{
+                  ...params.inputProps,
+                  autoComplete: "new-password", // disable autocomplete and autofill
+                }}
               />
             )}
-            onChange={(e, value) => {
-              if (!value || value === "") {
-                formik?.setFieldValue(name, "");
-
-                setDefaultValue("");
-              } else {
-                formik?.setFieldValue(name, value.Value);
-              }
-
-              if (onChange) {
-                onChange(value);
-              }
-            }}
           />
         </FormControl>
       )}
