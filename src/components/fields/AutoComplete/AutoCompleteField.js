@@ -23,21 +23,16 @@ const AutoCompleteField = ({
   formik,
   name,
   label,
-  onChange,
   options,
   required,
   loading,
 }) => {
-  const [idTypes, setIdTypes] = useState([]);
-
   const [defaultValue, setDefaultValue] = useState("Select a Country");
 
   useEffect(() => {
     if ((name && !defaultValue) || formik.values[name] === "")
       setDefaultValue(formik.values[name]);
   }, [formik, name]);
-
-  console.log(options, "OPT");
 
   return (
     <>
@@ -53,9 +48,7 @@ const AutoCompleteField = ({
           <Autocomplete
             id={name}
             options={options}
-            value={defaultValue ? { Value: defaultValue } : null}
-            getOptionLabel={(item) => item?.Value ? item?.Value : ""}
-            isOptionEqualToValue={(option, value) => option.Value === value.Value}
+            getOptionLabel={(option) => option.label} // Specify how to extract the label
             onChange={(e, val) => {
               formik?.setFieldValue(name, val ? val.value : ""); // Adjust for the case when value is null
             }}

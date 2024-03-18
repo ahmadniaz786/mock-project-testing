@@ -8,14 +8,18 @@ import { useFormik } from "formik";
 
 // import { AutoCompleteField, InputField } from "src/";
 import { InputField, AutoCompleteField } from "../../../../components/fields";
+import FormHeader from "../FormHeader/FormHeader";
 
 import { useValidationSchema, useInitialValues } from "./utils";
 
 const Step1 = (props) => {
   const {
     loading,
-
     submitLoading,
+    stepsArray,
+    activeStep,
+    handleBack,
+    handleNext,
   } = props;
 
   const formik = useFormik({
@@ -32,6 +36,18 @@ const Step1 = (props) => {
     },
   });
 
+  const handleNextClick = () => {
+    formik.handleSubmit();
+    console.log(formik?.isValid, "Valid");
+    if (formik?.isValid) {
+      handleNext();
+    }
+  };
+
+  const handleBackClick = () => {
+    handleBack();
+  };
+
   const countryOptions = [
     { label: "Pakistan", value: "Pakistan" },
     { label: "India", value: "India" },
@@ -46,6 +62,14 @@ const Step1 = (props) => {
 
   return (
     <Box sx={{ background: "white", p: 3 }}>
+      <FormHeader
+        loading={loading}
+        handleBack={handleBackClick}
+        handleNext={handleNextClick}
+        activeStep={activeStep}
+        title={"Step 1"}
+        steps={stepsArray}
+      />
       <Box sx={{ p: 2, pt: 3, pointerEvents: submitLoading ? "none" : "auto" }}>
         <form>
           <Grid2 container spacing={2}>

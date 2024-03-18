@@ -101,7 +101,7 @@ const DataForm = () => {
   const [activeForm, setActiveForm] = useState(null);
   const [activeStep, setActiveStep] = useState(0);
   const [formData, setFormData] = useState({});
-  const [disableForm,setDisableForm] = useState(false);
+  const [disableForm, setDisableForm] = useState(false);
 
   const stepsArray = [
     {
@@ -251,21 +251,15 @@ const DataForm = () => {
                   />
                 ) : (
                   <Box>
-                    <FormHeader
-                      loading={loading}
-                      handleBack={prev}
-                      handleNext={next}
-                      activeStep={activeStep}
-                      title={stepsArray[activeStep].label}
-                      steps={stepsArray}
-                    />
                     {activeForm &&
                       React.createElement(getComponentName(), {
                         activeStep: activeStep,
                         handleSubmit: handleSubmit,
                         steps: stepsArray,
                         loading: loading,
-                        disableForm: disableForm,
+                        handleBack: prev,
+                        handleSubmit: handleSubmit,
+                        handleNext: next,
                       })}
                   </Box>
                 )}
