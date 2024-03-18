@@ -5,6 +5,7 @@ import { Box } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
 import { useFormik } from "formik";
+import FormHeader from "../FormHeader/FormHeader";
 
 // import { AutoCompleteField, InputField } from "src/";
 import { InputField, AutoCompleteField } from "../../../../components/fields";
@@ -12,26 +13,43 @@ import { InputField, AutoCompleteField } from "../../../../components/fields";
 import { useValidationSchema, useInitialValues } from "./utils";
 
 const Step3 = (props) => {
-  const {
-    loading,
-    disableForm,
-    submitLoading,
-  } = props;
+    const {
+        loading,
+        submitLoading,
+        stepsArray,
+        activeStep,
+        handleBack,
+        handleNext,
+        disableForm
+      } = props;
+    
+      const formik = useFormik({
+        initialValues: useInitialValues(),
+    
+        validationSchema: useValidationSchema(),
+    
+        enableReinitialize: true,
+    
+        validateOnMount: true,
+    
+        onSubmit: (values) => {
+          console.log(values, "FORM VALUES");
+        },
+      });
+    
+      const handleNextClick = () => {
+        formik.handleSubmit();
+        console.log(formik?.isValid, "Valid");
+        if (formik?.isValid) {
+          handleNext();
+        }
+      };
+    
+      const handleBackClick = () => {
+        handleBack();
+      };
 
-  const formik = useFormik({
-    initialValues: useInitialValues(),
-
-    validationSchema: useValidationSchema(),
-
-    enableReinitialize: true,
-
-    validateOnMount: true,
-
-    onSubmit: (values) => {
-      console.log(values, "FORM VALUES");
-    },
-  });
-
+      
   const countryOptions = [
     { label: "Pakistan", value: "Pakistan" },
     { label: "India", value: "India" },
@@ -47,7 +65,14 @@ const Step3 = (props) => {
 
   return (
     <Box sx={{ background: "white", p: 3 }}>
-      
+      <FormHeader
+        loading={loading}
+        handleBack={handleBackClick}
+        handleNext={handleNextClick}
+        activeStep={activeStep}
+        title={"Step 3"}
+        steps={stepsArray}
+      />
       <Box sx={{ p: 2, pt: 3, pointerEvents: submitLoading ? 'none' : 'auto' }}>
                 <form >
                     <Grid2 container spacing={2}>

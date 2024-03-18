@@ -150,6 +150,7 @@ const DataForm = () => {
   }, []);
 
   const next = () => {
+    console.log("test");
     setFormSteps(activeStep);
     setActiveStep((prevStep) => prevStep + 1);
   };
