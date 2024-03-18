@@ -30,7 +30,7 @@ const AutoCompleteField = ({
   const [defaultValue, setDefaultValue] = useState("Select a Country");
 
   useEffect(() => {
-    if ((name && !defaultValue) || formik.values[name] === "")
+    if ((name && !defaultValue) || formik?.values[name] === "")
       setDefaultValue(formik.values[name]);
   }, [formik, name]);
 
@@ -46,6 +46,7 @@ const AutoCompleteField = ({
           sx={{ pointerEvents: "auto" }}
         >
           <Autocomplete
+            data-testid="dropdown-field"
             id={name}
             options={options}
             getOptionLabel={(option) => option.label} // Specify how to extract the label

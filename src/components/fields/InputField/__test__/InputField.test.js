@@ -2,25 +2,9 @@ import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 import InputField from "../InputField";
 
-// Mock formik values and handlers
-const formikMock = {
-  values: { name: "Testing" },
-  setFieldValue: jest.fn(),
-  touched: {},
-  errors: {},
-};
-
-
 describe("InputField Component", () => {
-
-  const renderComponent = () => {
-    return render(
-      <InputField formik={formikMock} name='Test' type='text' label= 'Test' />
-    )
-}
-
-  it("renders without crashing", () => {
-    renderComponent();
+  test("renders without crashing", () => {
+    render(<InputField />);
     const inputElement = screen.getByTestId("input-field");
     expect(inputElement).toBeInTheDocument();
   });
@@ -60,7 +44,15 @@ describe("InputField Component", () => {
   });
 
   it("displays loading skeleton when loading prop is true", () => {
-    render(<InputField name="Name" label="Name" formik={formikMock} type="text" loading />);
+    render(
+      <InputField
+        name="Name"
+        label="Name"
+        formik={formikMock}
+        type="text"
+        loading
+      />
+    );
     const skeletonElement = screen.getByTestId("input-loading-skeleton");
     expect(skeletonElement).toBeInTheDocument();
   });
@@ -87,16 +79,17 @@ describe("InputField Component", () => {
 
     // Assert that there are no errors or warnings after unmounting
     expect(true).toBe(true);
-})
+  });
 
-test("updates formik values on blur with changed input value", () => {
-  render(<InputField formik={formikMock} name="name" label="Name" required />);
-  const inputElement = screen.getByTestId("input-field");
-  
-  fireEvent.change(inputElement, { target: { value: "Test" } });
-  fireEvent.blur(inputElement);
+  test("updates formik values on blur with changed input value", () => {
+    render(
+      <InputField formik={formikMock} name="name" label="Name" required />
+    );
+    const inputElement = screen.getByTestId("input-field");
 
-  expect(formikMock.setFieldValue).toHaveBeenCalledWith("name", "Test");
-});
+    fireEvent.change(inputElement, { target: { value: "Test" } });
+    fireEvent.blur(inputElement);
 
+    expect(formikMock.setFieldValue).toHaveBeenCalledWith("name", "Test");
+  });
 });
