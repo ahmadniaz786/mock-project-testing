@@ -101,6 +101,7 @@ const DataForm = () => {
   const [activeForm, setActiveForm] = useState(null);
   const [activeStep, setActiveStep] = useState(0);
   const [formData, setFormData] = useState({});
+  const [disableForm,setDisableForm] = useState(false);
 
   const stepsArray = [
     {
@@ -167,8 +168,8 @@ const DataForm = () => {
 
   return (
     <Box pt={1}>
-      <Grid container sm={12} pt={2}>
-        <Grid xs={4} sm={3} md={2} sx={{ pr: 2, height: "auto" }}>
+      <Grid item container sm={12} pt={2}>
+        <Grid item xs={4} sm={3} md={2} sx={{ pr: 2, height: "auto" }}>
           {loading ? (
             <Skeleton
               variant="rounded"
@@ -212,7 +213,7 @@ const DataForm = () => {
             </Box>
           )}
         </Grid>
-        <Grid xs={8} sm={9} md={10} position="relative">
+        <Grid item xs={8} sm={9} md={10} position="relative">
           <React.Suspense
             fallback={
               <Box
@@ -264,6 +265,7 @@ const DataForm = () => {
                         handleSubmit: handleSubmit,
                         steps: stepsArray,
                         loading: loading,
+                        disableForm: disableForm,
                       })}
                   </Box>
                 )}

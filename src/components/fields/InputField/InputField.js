@@ -93,6 +93,7 @@ function InputField({
             rows={rows}
             onPaste={handlePaste}
             required={required ?? required}
+            data-testid="input-field"
             InputProps={
               showIcon && {
                 endAdornment: (

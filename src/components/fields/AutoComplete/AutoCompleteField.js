@@ -53,8 +53,9 @@ const AutoCompleteField = ({
           <Autocomplete
             id={name}
             options={options}
-            getOptionLabel={(option) => option.label} // Specify how to extract the label
-            value={defaultValue}
+            value={defaultValue ? { Value: defaultValue } : null}
+            getOptionLabel={(item) => item?.Value ? item?.Value : ""}
+            isOptionEqualToValue={(option, value) => option.Value === value.Value}
             onChange={(e, val) => {
               formik?.setFieldValue(name, val ? val.value : ""); // Adjust for the case when value is null
             }}
