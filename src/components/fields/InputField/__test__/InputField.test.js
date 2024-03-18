@@ -2,9 +2,23 @@ import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 import InputField from "../InputField";
 
+// Mock formik values and handlers
+const formikMock = {
+  values: { name: "Testing" },
+  setFieldValue: jest.fn(),
+  touched: {},
+  errors: {},
+};
+
 describe("InputField Component", () => {
-  test("renders without crashing", () => {
-    render(<InputField />);
+  const renderComponent = () => {
+    return render(
+      <InputField formik={formikMock} name="Test" type="text" label="Test" />
+    );
+  };
+
+  it("renders without crashing", () => {
+    renderComponent();
     const inputElement = screen.getByTestId("input-field");
     expect(inputElement).toBeInTheDocument();
   });
