@@ -1,6 +1,5 @@
 import React from "react";
 
-// import { Box, Grid2 } from "src/shared/material";
 import { Box } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
@@ -38,7 +37,7 @@ const Step1 = (props) => {
 
   const handleNextClick = () => {
     formik.handleSubmit();
-    console.log(formik?.isValid, "Valid");
+
     if (formik?.isValid) {
       handleNext();
     }
@@ -71,7 +70,7 @@ const Step1 = (props) => {
         steps={stepsArray}
       />
       <Box sx={{ p: 2, pt: 3, pointerEvents: submitLoading ? "none" : "auto" }}>
-        <form>
+        <form data-testid="step1-form">
           <Grid2 container spacing={2}>
             <Grid2 xs={6}>
               <InputField
