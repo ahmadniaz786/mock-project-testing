@@ -6,7 +6,7 @@ describe("Step1 Component", () => {
   beforeEach(() => {
     render(
       <div>
-        <FormHeader />
+        <FormHeader activeStep={0} />
       </div>
     );
   });

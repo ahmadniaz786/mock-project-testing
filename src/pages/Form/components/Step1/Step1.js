@@ -30,13 +30,12 @@ const Step1 = (props) => {
     validateOnMount: true,
 
     onSubmit: (values) => {
-      console.log(values, "FORM VALUES");
+      console.log(values, "submit");
     },
   });
 
   const handleNextClick = () => {
     formik.handleSubmit();
-
     if (formik?.isValid) {
       handleNext();
     }
@@ -93,7 +92,7 @@ const Step1 = (props) => {
               />
             </Grid>
 
-            <Grid xs={6}>
+            {/* <Grid xs={6}>
               <AutoCompleteField
                 name="Country"
                 formik={formik}
@@ -113,7 +112,7 @@ const Step1 = (props) => {
                 options={degreeOptions}
                 required
               />
-            </Grid>
+            </Grid> */}
           </Grid>
         </form>
       </Box>
