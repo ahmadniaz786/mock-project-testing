@@ -1,8 +1,7 @@
 import React from "react";
 
-// import { Box, Grid2 } from "src/shared/material";
-import { Box } from "@mui/material";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import { Box, Grid } from "@mui/material";
+// import Grid from "@mui/material/Unstable_Grid/Grid";
 
 import { useFormik } from "formik";
 import FormHeader from "../FormHeader/FormHeader";
@@ -74,9 +73,9 @@ const Step3 = (props) => {
         steps={stepsArray}
       />
       <Box sx={{ p: 2, pt: 3, pointerEvents: submitLoading ? 'none' : 'auto' }}>
-                <form >
-                    <Grid2 container spacing={2}>
-                        <Grid2 xs={6}>
+                <form data-testid="form">
+                    <Grid container spacing={2}>
+                        <Grid xs={6}>
                             <InputField
                                 formik={formik}
                                 name='COMMERCIAL_NAME_LINE_1_A'
@@ -85,18 +84,18 @@ const Step3 = (props) => {
                                 label= 'COMMERCIAL_NAME_LINE_1_A'
                                 disabled={disableForm}
                             />
-                        </Grid2 >
-                        <Grid2 xs={6}>
+                        </Grid >
+                        <Grid xs={6}>
                             <InputField
                                 formik={formik}
                                 name='COMMERCIAL_NAME_LINE_2_A'
                                 type='text'
                                 loading={loading}
                                 label= 'COMMERCIAL_NAME_LINE_2_A'
-                                
+                                disabled={true}
                             />
-                        </Grid2 >
-                        <Grid2 xs={6}>
+                        </Grid >
+                        <Grid xs={6}>
                             <InputField
                                 formik={formik}
                                 name='COMMERCIAL_NAME_LINE_1_E'
@@ -105,8 +104,8 @@ const Step3 = (props) => {
                                 label='COMMERCIAL_NAME_LINE_1_E'
                                 
                             />
-                        </Grid2 >
-                        <Grid2 xs={6}>
+                        </Grid >
+                        <Grid xs={6}>
                             <InputField
                                 formik={formik}
                                 name='COMMERCIAL_NAME_LINE_2_E'
@@ -115,8 +114,8 @@ const Step3 = (props) => {
                                 label= 'COMMERCIAL_NAME_LINE_2_E'
                                 
                             />
-                        </Grid2 >
-                        <Grid2 xs={6}>
+                        </Grid >
+                        <Grid xs={6}>
                             <AutoCompleteField
                                 name="ENTITY_NATIONALITY"
                                 formik={formik}
@@ -125,8 +124,8 @@ const Step3 = (props) => {
                                 disabled={disableForm}
                                 options={MovieOptions}
                             />
-                        </Grid2 >
-                        <Grid2 xs={6}>
+                        </Grid >
+                        <Grid xs={6}>
                             <AutoCompleteField
                                 name="PRIMARY_LANGUAGE"
                                 formik={formik}
@@ -135,8 +134,8 @@ const Step3 = (props) => {
                                 disabled={disableForm}
                                 options={countryOptions}
                             />
-                        </Grid2 >
-                        <Grid2 xs={6}>
+                        </Grid >
+                        <Grid xs={6}>
                             <AutoCompleteField
                                 name="STATEMENT_LANGUAGE"
                                 formik={formik}
@@ -145,8 +144,8 @@ const Step3 = (props) => {
                                 disabled={disableForm}
                                 options={countryOptions}
                             />
-                        </Grid2 >
-                        <Grid2 xs={6}>
+                        </Grid >
+                        <Grid xs={6}>
                             <AutoCompleteField
                                 name="REGISTRATION_ISSUER"
                                 formik={formik}
@@ -155,8 +154,8 @@ const Step3 = (props) => {
                                 disabled={disableForm}
                                 options={countryOptions}
                             />
-                        </Grid2 >
-                        <Grid2 xs={6}>
+                        </Grid >
+                        <Grid xs={6}>
                             <InputField
                                 formik={formik}
                                 name='MAXIMUM_CEILING_AMOUNT'
@@ -165,8 +164,8 @@ const Step3 = (props) => {
                                 label= 'MAXIMUM_CEILING_AMOUNT'
                                 
                             />
-                        </Grid2 >
-                        {/* <Grid2 xs={6}>
+                        </Grid >
+                        {/* <Grid xs={6}>
                             <DatePickerField
                                 formik={formik}
                                 name='Project Start Date'
@@ -175,8 +174,8 @@ const Step3 = (props) => {
                                 disabled={disableForm}
                                 maxDate={new Date()}
                             />
-                        </Grid2 > */}
-                        <Grid2 xs={6}>
+                        </Grid > */}
+                        <Grid xs={6}>
                             <InputField
                                 formik={formik}
                                 name='PROJECT_DURATION'
@@ -185,8 +184,8 @@ const Step3 = (props) => {
                                 label= 'PROJECT_DURATION'
                                 disabled={disableForm}
                             />
-                        </Grid2 >
-                        <Grid2 xs={6}>
+                        </Grid >
+                        <Grid xs={6}>
                             <InputField
                                 formik={formik}
                                 name='CR_ISSUANCE_AUTHORITY'
@@ -195,8 +194,8 @@ const Step3 = (props) => {
                                 label= 'CR_ISSUANCE_AUTHORITY'
                                 disabled={disableForm}
                             />
-                        </Grid2 >
-                        {/* <Grid2 xs={6}>
+                        </Grid >
+                        {/* <Grid xs={6}>
                             <DatePickerField
                                 formik={formik}
                                 name='Delete Date'
@@ -213,8 +212,8 @@ const Step3 = (props) => {
                                     )
                                 }
                             />
-                        </Grid2 > */}
-                        <Grid2 xs={6}>
+                        </Grid > */}
+                        <Grid xs={6}>
                             <InputField
                                 formik={formik}
                                 name='REASON_OF_DELETE'
@@ -223,8 +222,8 @@ const Step3 = (props) => {
                                 label= 'REASON_OF_DELETE'
                                 disabled={disableForm}
                             />
-                        </Grid2 >
-                </Grid2>
+                        </Grid >
+                </Grid>
             </form>
         </Box>
     </Box>
