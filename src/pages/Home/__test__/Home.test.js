@@ -35,4 +35,21 @@ describe('DataTable Component Unit Tests', () => {
 
     // Write assertions to check that the grid is updated with the next page data
   });
+
+
+  // it('navigates to next and previous pages correctly', () => {
+  //   render(<DataTable rows={rows} columns={columns} />);
+  //   const nextPageButton = screen.getByLabelText('Next page');
+  //   const prevPageButton = screen.getByLabelText('Previous page');
+    
+  //   fireEvent.click(nextPageButton);
+  //   let page2Rows = screen.getAllByRole('row').slice(1); // Exclude header row
+  //   expect(page2Rows[0]).toHaveTextContent('Jane Doe'); // Assuming pagination changes the order
+    
+  //   fireEvent.click(prevPageButton);
+  //   let page1Rows = screen.getAllByRole('row').slice(1); // Exclude header row
+  //   expect(page1Rows[0]).toHaveTextContent('John Doe');
+  // });
+
+
 });
