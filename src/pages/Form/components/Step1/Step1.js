@@ -92,8 +92,9 @@ const Step1 = (props) => {
               />
             </Grid>
 
-            {/* <Grid xs={6}>
+            <Grid xs={6}>
               <AutoCompleteField
+                data-testid="country"
                 name="Country"
                 formik={formik}
                 loading={loading}
@@ -105,6 +106,7 @@ const Step1 = (props) => {
 
             <Grid xs={6}>
               <AutoCompleteField
+                data-testid="degree"
                 name="Degree"
                 formik={formik}
                 loading={loading}
@@ -112,7 +114,7 @@ const Step1 = (props) => {
                 options={degreeOptions}
                 required
               />
-            </Grid> */}
+            </Grid>
           </Grid>
         </form>
       </Box>
