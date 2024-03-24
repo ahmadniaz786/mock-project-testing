@@ -12,6 +12,7 @@ import Step1 from "../Step1";
 
 describe("Step1 Component", () => {
   const handleNext = jest.fn();
+  const handleNextClick = jest.fn();
   // Mock handleNext function
 
   // Mock useFormik hook
@@ -43,53 +44,22 @@ describe("Step1 Component", () => {
   });
 
   test("rendering and submitting a basic Formik form", async () => {
-    const user = userEvent.setup();
+    // Fill in form fields
+    userEvent.type(screen.getByRole("textbox", { name: "First Name" }), "John");
+    userEvent.type(screen.getByRole("textbox", { name: "Last Name" }), "Dee");
 
-    await user.type(
-      screen.getByRole("textbox", { name: "First Name" }),
-      "John"
-    );
-    await user.type(screen.getByRole("textbox", { name: "Last Name" }), "Dee");
+    // Open and select options from dropdowns
+    userEvent.click(screen.getByRole("combobox", { name: "Country" }));
+    const option1 = await screen.findByRole("option", { name: "Pakistan" });
+    userEvent.click(option1);
 
-    // const dropdown1 = screen.getByLabelText("Country");
-    // // const button1 = screen.getByTitle("Open");
-    // act(() => {
-    //   userEvent.click(dropdown1);
-    // });
+    // Open and select options from dropdowns
+    userEvent.click(screen.getByRole("combobox", { name: "Degree" }));
+    const option2 = await screen.findByRole("option", { name: "Master" });
+    userEvent.click(option2);
 
-    // let options1 = screen.getByTitle("Pakistan");
-    // console.log(options1);
-    // await user.click(options1);
-
-    const selectLabel1 = "Pakistan";
-    const selectLabel2 = "Master";
-
-    const dropdown1 = screen.getByRole("combobox", { name: "Country" });
-    userEvent.click(dropdown1);
-    // Locate the corresponding popup (`listbox`) of options.
-    const optionsPopupEl = await screen.findByRole("option", {
-      name: selectLabel1,
-    });
-
-    const dropdown2 = screen.getByRole("combobox", { name: "Degree" });
-    userEvent.click(dropdown2);
-    // Locate the corresponding popup (`listbox`) of options.
-    const optionsPopupEl2 = await screen.findByRole("option", {
-      name: selectLabel2,
-    });
-
-    console.log(optionsPopupEl2, "OPT");
-
-    // Click an option in the popup.
-    userEvent.click(within(optionsPopupEl).findByText("Pakistan"));
-    fireEvent.change(dropdown1, { target: { value: "Pakistan" } });
-
-    // userEvent.click(within(optionsPopupEl2).findByText("Master"));
-
-    // userEvent.click(optionsPopupEl);
-    // userEvent.click(optionsPopupEl2);
-
-    await user.click(screen.getByTestId("next-button"));
+    // Submit the form
+    userEvent.click(screen.getByTestId("next-button"));
 
     // Assert that handleNextMock has been called
     await waitFor(() => expect(handleNext).toHaveBeenCalled());

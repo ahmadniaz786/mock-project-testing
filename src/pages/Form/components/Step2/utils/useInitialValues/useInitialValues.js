@@ -2,7 +2,7 @@ export const useInitialValues = (props) => {
   return {
     firstName: "",
     lastName: "",
-    Country: "",
-    Degree: "",
+    info_authenticity: "",
+    promo_emails: "",
   };
 };

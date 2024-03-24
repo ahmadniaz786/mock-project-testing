@@ -1,13 +1,17 @@
 import React from "react";
 
-// import { Box, Grid2 } from "src/shared/material";
-import { Box } from "@mui/material";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+// import { Box, Grid } from "src/shared/material";
+import { Box, Typography, Grid } from "@mui/material";
 
 import { useFormik } from "formik";
 
 // import { AutoCompleteField, InputField } from "src/";
-import { InputField, AutoCompleteField } from "../../../../components/fields";
+import {
+  InputField,
+  AutoCompleteField,
+  CheckboxField,
+  SwitchField,
+} from "../../../../components/fields";
 import FormHeader from "../FormHeader/FormHeader";
 
 import { useValidationSchema, useInitialValues } from "./utils";
@@ -72,8 +76,8 @@ const Step2 = (props) => {
       />
       <Box sx={{ p: 2, pt: 3, pointerEvents: submitLoading ? "none" : "auto" }}>
         <form>
-          <Grid2 container spacing={2}>
-            <Grid2 xs={6}>
+          <Grid container spacing={2}>
+            <Grid xs={6}>
               <InputField
                 formik={formik}
                 name="firstName"
@@ -82,9 +86,9 @@ const Step2 = (props) => {
                 required
                 label="First Name"
               />
-            </Grid2>
+            </Grid>
 
-            <Grid2 xs={6}>
+            <Grid xs={6}>
               <InputField
                 formik={formik}
                 name="lastName"
@@ -93,30 +97,30 @@ const Step2 = (props) => {
                 required
                 label="Last Name"
               />
-            </Grid2>
+            </Grid>
 
-            <Grid2 xs={6}>
-              <AutoCompleteField
-                name="Country"
+            <Grid xs={6}>
+              <CheckboxField
+                name="info_authenticity"
                 formik={formik}
                 loading={loading}
-                label="Country"
-                options={countryOptions}
-                required
+                label="I certify the presented information is correct"
               />
-            </Grid2>
+            </Grid>
 
-            <Grid2 xs={6}>
-              <AutoCompleteField
-                name="Degree"
+            <Grid>
+              <SwitchField
+                name="promo_emails"
                 formik={formik}
                 loading={loading}
-                label="Degree"
-                options={degreeOptions}
-                required
               />
-            </Grid2>
-          </Grid2>
+            </Grid>
+            <Grid>
+              <Typography variant="subtitle2">
+                Do you want to recieve promotion emails
+              </Typography>
+            </Grid>
+          </Grid>
         </form>
       </Box>
     </Box>

@@ -30,8 +30,9 @@ const AutoCompleteField = ({
   const [defaultValue, setDefaultValue] = useState("Select a Country");
 
   useEffect(() => {
-    if ((name && !defaultValue) || formik?.values[name] === "")
+    if (name && formik && formik.values && formik.values[name] !== undefined) {
       setDefaultValue(formik.values[name]);
+    }
   }, [formik, name]);
 
   return (

@@ -35,7 +35,6 @@ const FormHeader = (props) => {
           disabled={props.activeStep === 0 || props?.loading}
           onClick={props.handleBack}
           sx={{ minWidth: "unset", width: "40px", borderRadius: "8px" }}
-          data-testid="prev-button"
         >
           <ArrowBack />
         </Button>
@@ -58,7 +57,6 @@ const FormHeader = (props) => {
               onClick={props.handleNext}
               variant="contained"
               sx={{ minWidth: "unset", width: "40px", borderRadius: "8px" }}
-              data-testid="next-button"
             >
               <ArrowForward />
             </Button>
