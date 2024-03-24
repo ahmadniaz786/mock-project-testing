@@ -48,6 +48,8 @@ const AutoCompleteField = ({
           <Autocomplete
             data-testid="dropdown-field"
             id={name}
+            error={Boolean(formik?.touched?.[name] && formik?.errors?.[name])}
+            helperText={formik?.touched?.[name] && formik?.errors?.[name]}
             options={options}
             getOptionLabel={(option) => option.label} // Specify how to extract the label
             onChange={(e, val) => {

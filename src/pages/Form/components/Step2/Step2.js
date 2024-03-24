@@ -13,7 +13,14 @@ import FormHeader from "../FormHeader/FormHeader";
 import { useValidationSchema, useInitialValues } from "./utils";
 
 const Step2 = (props) => {
-  const { loading, submitLoading, stepsArray, activeStep, handleBack,handleNext } = props;
+  const {
+    loading,
+    submitLoading,
+    stepsArray,
+    activeStep,
+    handleBack,
+    handleNext,
+  } = props;
 
   const formik = useFormik({
     initialValues: useInitialValues(),

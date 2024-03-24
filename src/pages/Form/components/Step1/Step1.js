@@ -1,12 +1,10 @@
 import React from "react";
 
-// import { Box, Grid2 } from "src/shared/material";
-import { Box } from "@mui/material";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import { Box, Grid } from "@mui/material";
+// import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
 import { useFormik } from "formik";
 
-// import { AutoCompleteField, InputField } from "src/";
 import { InputField, AutoCompleteField } from "../../../../components/fields";
 import FormHeader from "../FormHeader/FormHeader";
 
@@ -32,13 +30,12 @@ const Step1 = (props) => {
     validateOnMount: true,
 
     onSubmit: (values) => {
-      console.log(values, "FORM VALUES");
+      console.log(values, "submit");
     },
   });
 
   const handleNextClick = () => {
     formik.handleSubmit();
-    console.log(formik?.isValid, "Valid");
     if (formik?.isValid) {
       handleNext();
     }
@@ -71,9 +68,9 @@ const Step1 = (props) => {
         steps={stepsArray}
       />
       <Box sx={{ p: 2, pt: 3, pointerEvents: submitLoading ? "none" : "auto" }}>
-        <form>
-          <Grid2 container spacing={2}>
-            <Grid2 xs={6}>
+        <form data-testid="step1-form">
+          <Grid container spacing={2}>
+            <Grid xs={6}>
               <InputField
                 formik={formik}
                 name="firstName"
@@ -82,9 +79,9 @@ const Step1 = (props) => {
                 required
                 label="First Name"
               />
-            </Grid2>
+            </Grid>
 
-            <Grid2 xs={6}>
+            <Grid xs={6}>
               <InputField
                 formik={formik}
                 name="lastName"
@@ -93,9 +90,9 @@ const Step1 = (props) => {
                 required
                 label="Last Name"
               />
-            </Grid2>
+            </Grid>
 
-            <Grid2 xs={6}>
+            {/* <Grid xs={6}>
               <AutoCompleteField
                 name="Country"
                 formik={formik}
@@ -104,9 +101,9 @@ const Step1 = (props) => {
                 options={countryOptions}
                 required
               />
-            </Grid2>
+            </Grid>
 
-            <Grid2 xs={6}>
+            <Grid xs={6}>
               <AutoCompleteField
                 name="Degree"
                 formik={formik}
@@ -115,8 +112,8 @@ const Step1 = (props) => {
                 options={degreeOptions}
                 required
               />
-            </Grid2>
-          </Grid2>
+            </Grid> */}
+          </Grid>
         </form>
       </Box>
     </Box>

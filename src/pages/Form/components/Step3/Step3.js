@@ -12,43 +12,42 @@ import { InputField, AutoCompleteField } from "../../../../components/fields";
 import { useValidationSchema, useInitialValues } from "./utils";
 
 const Step3 = (props) => {
-    const {
-        loading,
-        submitLoading,
-        stepsArray,
-        activeStep,
-        handleBack,
-        handleNext,
-        disableForm
-      } = props;
-    
-      const formik = useFormik({
-        initialValues: useInitialValues(),
-    
-        validationSchema: useValidationSchema(),
-    
-        enableReinitialize: true,
-    
-        validateOnMount: true,
-    
-        onSubmit: (values) => {
-          console.log(values, "FORM VALUES");
-        },
-      });
-    
-      const handleNextClick = () => {
-        formik.handleSubmit();
-        console.log(formik?.isValid, "Valid");
-        if (formik?.isValid) {
-          handleNext();
-        }
-      };
-    
-      const handleBackClick = () => {
-        handleBack();
-      };
+  const {
+    loading,
+    submitLoading,
+    stepsArray,
+    activeStep,
+    handleBack,
+    handleNext,
+    disableForm,
+  } = props;
 
-      
+  const formik = useFormik({
+    initialValues: useInitialValues(),
+
+    validationSchema: useValidationSchema(),
+
+    enableReinitialize: true,
+
+    validateOnMount: true,
+
+    onSubmit: (values) => {
+      console.log(values, "FORM VALUES");
+    },
+  });
+
+  const handleNextClick = () => {
+    formik.handleSubmit();
+    console.log(formik?.isValid, "Valid");
+    if (formik?.isValid) {
+      handleNext();
+    }
+  };
+
+  const handleBackClick = () => {
+    handleBack();
+  };
+
   const countryOptions = [
     { label: "Pakistan", value: "Pakistan" },
     { label: "India", value: "India" },

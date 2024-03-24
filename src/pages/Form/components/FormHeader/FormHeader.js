@@ -5,6 +5,7 @@ import { ArrowForward, ArrowBack } from "@mui/icons-material";
 const FormHeader = (props) => {
   return (
     <Box
+      data-testid="form-header"
       sx={{
         display: "flex",
 
@@ -28,6 +29,7 @@ const FormHeader = (props) => {
 
       <Box sx={{ display: "flex", gap: "10px" }}>
         <Button
+          data-testid="back-button"
           variant="outlined"
           color="inherit"
           disabled={props.activeStep === 0 || props?.loading}
@@ -51,6 +53,7 @@ const FormHeader = (props) => {
         {props.activeStep !== props?.steps?.length - 1 ? (
           <>
             <Button
+              data-testid="next-button"
               loading={props?.loading}
               onClick={props.handleNext}
               variant="contained"
@@ -63,6 +66,7 @@ const FormHeader = (props) => {
         ) : (
           <>
             <Button
+              data-testid="submit-button"
               loading={props?.loading}
               onClick={props.handleSubmit}
               variant="contained"

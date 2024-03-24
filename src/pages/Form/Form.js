@@ -10,7 +10,7 @@ import {
   Skeleton,
   Grid,
 } from "@mui/material";
-import { Step1, Step2, Step3, Step4, FormHeader } from "./components";
+import { Step1, Step2, Step3, Step4 } from "./components";
 
 import StepConnector, {
   stepConnectorClasses,
@@ -42,7 +42,7 @@ const IcrmConnector = styled(StepConnector)(({ theme }) => ({
   },
 }));
 
-const IcrmStepIconRoot = styled("div")(({ theme, ownerState }) => ({
+const IcrmStepIconRoot = styled("div")(({ theme }) => ({
   display: "flex",
   height: 22,
   alignItems: "center",
@@ -100,8 +100,6 @@ const DataForm = () => {
   const [loading, setLoading] = useState(false);
   const [activeForm, setActiveForm] = useState(null);
   const [activeStep, setActiveStep] = useState(0);
-  const [formData, setFormData] = useState({});
-  const [disableForm, setDisableForm] = useState(false);
 
   const stepsArray = [
     {
@@ -255,7 +253,6 @@ const DataForm = () => {
                     {activeForm &&
                       React.createElement(getComponentName(), {
                         activeStep: activeStep,
-                        handleSubmit: handleSubmit,
                         steps: stepsArray,
                         loading: loading,
                         handleBack: prev,
