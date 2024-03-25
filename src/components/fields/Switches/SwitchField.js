@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Skeleton } from "@mui/material";
+import { Skeleton, FormControlLabel } from "@mui/material";
 
 import { styled } from "@mui/material/styles";
 
@@ -79,7 +79,7 @@ const IOSSwitch = styled((props) => (
   },
 }));
 
-const SwitchField = ({ formik, name, loading, onChange }) => {
+const SwitchField = ({ formik, name, loading, onChange, label }) => {
   const [checked, setValue] = React.useState(false);
 
   React.useEffect(() => {
@@ -107,14 +107,22 @@ const SwitchField = ({ formik, name, loading, onChange }) => {
       {loading ? (
         <Skeleton variant="rounded" width={"100%"} height={55} />
       ) : (
-        <IOSSwitch
-          checked={checked}
-          error={Boolean(formik?.touched?.[name] && formik?.errors?.[name])}
-          helperText={formik?.touched?.[name] && formik?.errors?.[name]}
-          onChange={handleChange}
-          inputProps={{
-            "aria-label": "controlled",
-          }}
+        <FormControlLabel
+          aria-labelledby="demo-row-radio-buttons-group-label"
+          label={label}
+          control={
+            <IOSSwitch
+              data-testid="switch-field"
+              name={name}
+              checked={checked}
+              error={Boolean(formik?.touched?.[name] && formik?.errors?.[name])}
+              helperText={formik?.touched?.[name] && formik?.errors?.[name]}
+              onChange={handleChange}
+              inputProps={{
+                "aria-label": "controlled",
+              }}
+            />
+          }
         />
       )}
     </>

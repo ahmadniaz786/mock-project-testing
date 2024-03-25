@@ -8,7 +8,6 @@ import { useFormik } from "formik";
 // import { AutoCompleteField, InputField } from "src/";
 import {
   InputField,
-  AutoCompleteField,
   CheckboxField,
   SwitchField,
 } from "../../../../components/fields";
@@ -75,9 +74,9 @@ const Step2 = (props) => {
         steps={stepsArray}
       />
       <Box sx={{ p: 2, pt: 3, pointerEvents: submitLoading ? "none" : "auto" }}>
-        <form>
-          <Grid container spacing={2}>
-            <Grid xs={6}>
+        <form data-testid="step2-form">
+          <Grid container spacing={2} justifyContent="space-around">
+            <Grid xs={5} mt={3}>
               <InputField
                 formik={formik}
                 name="firstName"
@@ -88,7 +87,7 @@ const Step2 = (props) => {
               />
             </Grid>
 
-            <Grid xs={6}>
+            <Grid xs={5} mt={3}>
               <InputField
                 formik={formik}
                 name="lastName"
@@ -99,8 +98,9 @@ const Step2 = (props) => {
               />
             </Grid>
 
-            <Grid xs={6}>
+            <Grid xs={6} mt={3}>
               <CheckboxField
+                data-testid="certify-checkbox"
                 name="info_authenticity"
                 formik={formik}
                 loading={loading}
@@ -108,17 +108,13 @@ const Step2 = (props) => {
               />
             </Grid>
 
-            <Grid>
+            <Grid xs={6} mt={3}>
               <SwitchField
                 name="promo_emails"
                 formik={formik}
                 loading={loading}
+                label="Do you want to recieve promotion emails"
               />
-            </Grid>
-            <Grid>
-              <Typography variant="subtitle2">
-                Do you want to recieve promotion emails
-              </Typography>
             </Grid>
           </Grid>
         </form>

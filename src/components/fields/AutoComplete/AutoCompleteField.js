@@ -27,14 +27,6 @@ const AutoCompleteField = ({
   required,
   loading,
 }) => {
-  const [defaultValue, setDefaultValue] = useState("Select a Country");
-
-  useEffect(() => {
-    if (name && formik && formik.values && formik.values[name] !== undefined) {
-      setDefaultValue(formik.values[name]);
-    }
-  }, [formik, name]);
-
   return (
     <>
       {loading ? (
@@ -43,14 +35,15 @@ const AutoCompleteField = ({
         <FormControl
           key={name}
           fullWidth
-          error={Boolean(formik?.touched[name] && formik?.errors[name])}
+          // error={Boolean(formik?.touched[name] && formik?.errors[name])}
+          // helperText={formik?.touched?.[name] && formik?.errors?.[name]}
           sx={{ pointerEvents: "auto" }}
         >
           <Autocomplete
             data-testid="dropdown-field"
             id={name}
-            error={Boolean(formik?.touched?.[name] && formik?.errors?.[name])}
-            helperText={formik?.touched?.[name] && formik?.errors?.[name]}
+            // error={Boolean(formik?.touched?.[name] && formik?.errors?.[name])}
+            // helperText={formik?.touched?.[name] && formik?.errors?.[name]}
             options={options}
             getOptionLabel={(option) => option.label} // Specify how to extract the label
             onChange={(e, val) => {
@@ -73,6 +66,10 @@ const AutoCompleteField = ({
                 name={name}
                 label={label}
                 variant="outlined"
+                error={Boolean(
+                  formik?.touched?.[name] && formik?.errors?.[name]
+                )}
+                helperText={formik?.touched?.[name] && formik?.errors?.[name]}
                 fullWidth
                 inputProps={{
                   ...params.inputProps,

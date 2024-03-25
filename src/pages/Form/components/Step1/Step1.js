@@ -69,8 +69,8 @@ const Step1 = (props) => {
       />
       <Box sx={{ p: 2, pt: 3, pointerEvents: submitLoading ? "none" : "auto" }}>
         <form data-testid="step1-form">
-          <Grid container spacing={2}>
-            <Grid xs={6}>
+          <Grid container spacing={2} justifyContent="space-around">
+            <Grid xs={5} mt={3}>
               <InputField
                 formik={formik}
                 name="firstName"
@@ -81,7 +81,7 @@ const Step1 = (props) => {
               />
             </Grid>
 
-            <Grid xs={6}>
+            <Grid xs={5} mt={3}>
               <InputField
                 formik={formik}
                 name="lastName"
@@ -92,7 +92,7 @@ const Step1 = (props) => {
               />
             </Grid>
 
-            <Grid xs={6}>
+            <Grid xs={5} mt={3}>
               <AutoCompleteField
                 data-testid="country"
                 name="Country"
@@ -104,7 +104,7 @@ const Step1 = (props) => {
               />
             </Grid>
 
-            <Grid xs={6}>
+            <Grid xs={5} mt={3}>
               <AutoCompleteField
                 data-testid="degree"
                 name="Degree"

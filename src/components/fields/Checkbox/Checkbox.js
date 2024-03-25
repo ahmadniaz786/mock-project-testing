@@ -31,6 +31,8 @@ const CheckboxField = ({ formik, name, label, loading, onChange }) => {
               name={name}
               checked={checked}
               onChange={handleChange}
+              error={Boolean(formik?.touched?.[name] && formik?.errors?.[name])}
+              helperText={formik?.touched?.[name] && formik?.errors?.[name]}
               inputProps={{ "aria-label": "controlled" }}
             />
           }

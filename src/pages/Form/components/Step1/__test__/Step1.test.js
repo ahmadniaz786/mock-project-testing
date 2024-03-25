@@ -7,22 +7,27 @@ import {
   within,
   act,
 } from "@testing-library/react";
+import { useFormik } from "formik";
 import userEvent from "@testing-library/user-event";
 import Step1 from "../Step1";
 
 describe("Step1 Component", () => {
+  // Mock handleNext function
   const handleNext = jest.fn();
   const handleNextClick = jest.fn();
-  // Mock handleNext function
 
-  // Mock useFormik hook
-  jest.mock("formik", () => ({
-    useFormik: jest.fn(() => ({
-      handleSubmit: jest.fn(),
-      isValid: true, // Mock the isValid property to return true
-      values: {}, // You may need to add values if your form relies on them
-    })),
-  }));
+  // // Mock useFormik hook
+  // jest.mock("formik", () => ({
+  //   useFormik: jest.fn(() => ({
+  //     handleSubmit: jest.fn(), // Mock handleSubmit function
+  //     isValid: true,
+  //     initialValues: {},
+  //     onSubmit: jest.fn(), // Mock onSubmit function
+  //     touched: {},
+  //     errors: {},
+  //     validateOnChange: false,
+  //   })),
+  // }));
 
   beforeEach(() => {
     render(<Step1 handleNext={handleNext} />);
@@ -39,8 +44,12 @@ describe("Step1 Component", () => {
     fireEvent.click(nextButton);
     const validation1 = screen.getByText("First name is required");
     const validation2 = screen.getByText("Last name is required");
+    const validation3 = screen.getByText("must select a country");
+    const validation4 = screen.getByText("must select a degree");
     expect(validation1).toBeInTheDocument();
     expect(validation2).toBeInTheDocument();
+    expect(validation3).toBeInTheDocument();
+    expect(validation4).toBeInTheDocument();
   });
 
   test("rendering and submitting a basic Formik form", async () => {
@@ -58,11 +67,14 @@ describe("Step1 Component", () => {
     const option2 = await screen.findByRole("option", { name: "Master" });
     userEvent.click(option2);
 
-    // Submit the form
-    userEvent.click(screen.getByTestId("next-button"));
+    const nextButton = screen.getByTestId("next-button");
 
-    // Assert that handleNextMock has been called
-    await waitFor(() => expect(handleNext).toHaveBeenCalled());
+    // Submit the form
+    await userEvent.click(nextButton);
+
+    await waitFor(() => {
+      expect(handleNext).toHaveBeenCalled();
+    });
   });
 
   // test("rendering and submitting a basic Formik form", async () => {
