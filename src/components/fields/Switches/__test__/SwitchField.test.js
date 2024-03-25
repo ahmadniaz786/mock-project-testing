@@ -12,32 +12,30 @@ describe("CheckboxField Component", () => {
   };
 
   beforeEach(() => {
-    render(<SwitchField />);
+    render(<SwitchField formik={formikMock} name="info_authenticity" />);
   });
-
   test("renders without crashing", async () => {
-    const checkboxElement = screen.getByTestId("switch-field");
-    expect(checkboxElement).toBeInTheDocument();
+    const switchElement = screen.getByRole("checkbox");
+    expect(switchElement).toBeInTheDocument();
   });
 
   test("will change the value to true", async () => {
-    const switchElement = screen.getByTestId("switch-field");
+    const switchElement = screen.getByRole("checkbox");
+    fireEvent.click(switchElement);
 
-    fireEvent.click(checkboxElement);
-
-    expect(checkboxElement.checked).toBe(true);
+    expect(switchElement.checked).toBe(true);
   });
 
-  //   test("will change the value to false", async () => {
-  //     const checkbox = screen.getByRole("checkbox");
-  //     expect(checkbox.checked).toBe(false);
+  test("will change the value to false", async () => {
+    const switchElement = screen.getByRole("checkbox");
+    expect(switchElement.checked).toBe(false);
 
-  //     fireEvent.click(checkbox);
+    fireEvent.click(switchElement);
 
-  //     expect(checkbox.checked).toBe(true);
+    expect(switchElement.checked).toBe(true);
 
-  //     fireEvent.click(checkbox);
+    fireEvent.click(switchElement);
 
-  //     expect(checkbox.checked).toBe(false);
-  //   });
+    expect(switchElement.checked).toBe(false);
+  });
 });

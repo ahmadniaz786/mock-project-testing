@@ -147,8 +147,7 @@ const DataForm = () => {
     });
   }, []);
 
-  const next = () => {
-    console.log("test");
+  const handleNext = () => {
     setFormSteps(activeStep);
     setActiveStep((prevStep) => prevStep + 1);
   };
@@ -257,7 +256,7 @@ const DataForm = () => {
                         loading: loading,
                         handleBack: prev,
                         handleSubmit: handleSubmit,
-                        handleNext: next,
+                        handleNext: handleNext,
                       })}
                   </Box>
                 )}

@@ -16,7 +16,7 @@ const Step4 = (props) => {
   const {
     loading,
     submitLoading,
-    stepsArray,
+    steps,
     activeStep,
     handleBack,
     handleNext,
@@ -38,7 +38,6 @@ const Step4 = (props) => {
   });
   const handleNextClick = () => {
     formik.handleSubmit();
-    console.log(formik?.isValid, "Valid");
     if (formik?.isValid) {
       handleNext();
     }
@@ -67,7 +66,7 @@ const Step4 = (props) => {
         handleNext={handleNextClick}
         activeStep={activeStep}
         title={"Step 4"}
-        steps={stepsArray}
+        steps={steps}
       />
       <Box sx={{ p: 2, pt: 3, pointerEvents: submitLoading ? "none" : "auto" }}>
         <form>

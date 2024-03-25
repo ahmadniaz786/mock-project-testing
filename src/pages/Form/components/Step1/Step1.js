@@ -11,14 +11,8 @@ import FormHeader from "../FormHeader/FormHeader";
 import { useValidationSchema, useInitialValues } from "./utils";
 
 const Step1 = (props) => {
-  const {
-    loading,
-    submitLoading,
-    stepsArray,
-    activeStep,
-    handleBack,
-    handleNext,
-  } = props;
+  const { loading, submitLoading, steps, activeStep, handleBack, handleNext } =
+    props;
 
   const formik = useFormik({
     initialValues: useInitialValues(),
@@ -65,7 +59,7 @@ const Step1 = (props) => {
         handleNext={handleNextClick}
         activeStep={activeStep}
         title={"Step 1"}
-        steps={stepsArray}
+        steps={steps}
       />
       <Box sx={{ p: 2, pt: 3, pointerEvents: submitLoading ? "none" : "auto" }}>
         <form data-testid="step1-form">

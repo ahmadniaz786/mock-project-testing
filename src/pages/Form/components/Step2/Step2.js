@@ -16,14 +16,8 @@ import FormHeader from "../FormHeader/FormHeader";
 import { useValidationSchema, useInitialValues } from "./utils";
 
 const Step2 = (props) => {
-  const {
-    loading,
-    submitLoading,
-    stepsArray,
-    activeStep,
-    handleBack,
-    handleNext,
-  } = props;
+  const { loading, submitLoading, steps, activeStep, handleBack, handleNext } =
+    props;
 
   const formik = useFormik({
     initialValues: useInitialValues(),
@@ -41,7 +35,6 @@ const Step2 = (props) => {
 
   const handleNextClick = () => {
     formik.handleSubmit();
-    console.log(formik?.isValid, "Valid");
     if (formik?.isValid) {
       handleNext();
     }
@@ -51,18 +44,6 @@ const Step2 = (props) => {
     handleBack();
   };
 
-  const countryOptions = [
-    { label: "Pakistan", value: "Pakistan" },
-    { label: "India", value: "India" },
-    { label: "England", value: "England" },
-    { label: "USA", value: "USA" },
-  ];
-  const degreeOptions = [
-    { label: "Bachelor", value: "Bachelor" },
-    { label: "Master", value: "Master" },
-    { label: "PHD", value: "PHD" },
-  ];
-
   return (
     <Box sx={{ background: "white", p: 3 }}>
       <FormHeader
@@ -71,7 +52,7 @@ const Step2 = (props) => {
         handleNext={handleNextClick}
         activeStep={activeStep}
         title={"Step 2"}
-        steps={stepsArray}
+        steps={steps}
       />
       <Box sx={{ p: 2, pt: 3, pointerEvents: submitLoading ? "none" : "auto" }}>
         <form data-testid="step2-form">

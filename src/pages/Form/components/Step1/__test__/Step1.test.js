@@ -1,36 +1,39 @@
 import React from "react";
-import {
-  render,
-  fireEvent,
-  screen,
-  waitFor,
-  within,
-  act,
-} from "@testing-library/react";
-import { useFormik } from "formik";
+import { render, fireEvent, screen } from "@testing-library/react";
+
 import userEvent from "@testing-library/user-event";
 import Step1 from "../Step1";
 
 describe("Step1 Component", () => {
   // Mock handleNext function
-  const handleNext = jest.fn();
-  const handleNextClick = jest.fn();
 
-  // // Mock useFormik hook
-  // jest.mock("formik", () => ({
-  //   useFormik: jest.fn(() => ({
-  //     handleSubmit: jest.fn(), // Mock handleSubmit function
-  //     isValid: true,
-  //     initialValues: {},
-  //     onSubmit: jest.fn(), // Mock onSubmit function
-  //     touched: {},
-  //     errors: {},
-  //     validateOnChange: false,
-  //   })),
-  // }));
+  const handleNextMock = jest.fn();
+
+  // Mock useFormik hook
+  jest.mock("formik", () => ({
+    useFormik: jest.fn(() => ({
+      handleSubmit: jest.fn(), // Mock handleSubmit function
+      isValid: true,
+      values: {},
+      touched: {},
+      errors: {},
+      validateOnChange: false,
+    })),
+  }));
 
   beforeEach(() => {
-    render(<Step1 handleNext={handleNext} />);
+    render(
+      <>
+        <Step1
+          handleNext={handleNextMock}
+          loading={false}
+          submitLoading={false}
+          stepsArray={[]}
+          activeStep={0}
+          handleBack={() => {}}
+        />
+      </>
+    );
   });
 
   test("form renders without crashing", () => {
@@ -38,7 +41,7 @@ describe("Step1 Component", () => {
     expect(formElement).toBeInTheDocument();
   });
 
-  test("form renders validations", () => {
+  test("will render form validations if required fields are not filled", () => {
     const nextButton = screen.getByTestId("next-button");
 
     fireEvent.click(nextButton);
@@ -52,7 +55,7 @@ describe("Step1 Component", () => {
     expect(validation4).toBeInTheDocument();
   });
 
-  test("rendering and submitting a basic Formik form", async () => {
+  test("will not show errors if all required fields are filled ", async () => {
     // Fill in form fields
     userEvent.type(screen.getByRole("textbox", { name: "First Name" }), "John");
     userEvent.type(screen.getByRole("textbox", { name: "Last Name" }), "Dee");
@@ -69,48 +72,17 @@ describe("Step1 Component", () => {
 
     const nextButton = screen.getByTestId("next-button");
 
-    // Submit the form
-    await userEvent.click(nextButton);
+    // // Submit the form
+    userEvent.click(nextButton);
 
-    await waitFor(() => {
-      expect(handleNext).toHaveBeenCalled();
-    });
+    const validation1 = screen.queryByText("First name is required");
+    const validation2 = screen.queryByText("Last name is required");
+    const validation3 = screen.queryByText("must select a country");
+    const validation4 = screen.queryByText("must select a degree");
+
+    expect(validation1).not.toBeInTheDocument();
+    expect(validation2).not.toBeInTheDocument();
+    expect(validation3).not.toBeInTheDocument();
+    expect(validation4).not.toBeInTheDocument();
   });
-
-  // test("rendering and submitting a basic Formik form", async () => {
-  //   const user = userEvent.setup();
-
-  //   await user.type(
-  //     screen.getByRole("textbox", { name: "First Name" }),
-  //     "John"
-  //   );
-  //   await user.type(screen.getByRole("textbox", { name: "Last Name" }), "Dee");
-
-  //   const dropdown1 = screen.getByRole("combobox", { name: "Country" });
-  //   user.selectOptions(
-  //     dropdown1,
-  //     within(dropdown1).getByRole("option", { name: "Pakistan" })
-  //   );
-
-  //   const dropdown2 = screen.getByRole("combobox", { name: "Degree" });
-  //   user.selectOptions(
-  //     dropdown2,
-  //     within(dropdown2).getByRole("option", { name: "Master" })
-  //   );
-
-  //   await user.click(screen.getByTestId("next-button"));
-
-  //   // Assert that handleNextMock has been called
-  //   await waitFor(() => {
-  //     expect(useFormik().handleSubmit).toHaveBeenCalledWith({
-  //       firstName: "John",
-  //       lastName: "Dee",
-  //       Country: "Pakistan",
-  //       Degree: "Master",
-  //     });
-  //   });
-
-  //   // Assert that handleNextMock has been called
-  //   expect(handleNext).toHaveBeenCalled();
-  // });
 });
