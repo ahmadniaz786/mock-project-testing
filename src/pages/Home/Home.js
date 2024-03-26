@@ -54,8 +54,9 @@ export default function DataTable(){
     navigate("/form");
   };
   return (
-    <Box sx={{ height: 400, width: '80%', margin: '0 auto', textAlign: 'center',paddingTop:'40px'  }} >
+    <Box sx={{ height: 400, width: '100%', margin: '0 auto', textAlign: 'center',paddingTop:'40px'  }} >
       <DataGrid
+        data-testid='data-form'
         rows={rows}
         columns={columns}
         initialState={{
@@ -66,9 +67,9 @@ export default function DataTable(){
           },
         }}
         pageSizeOptions={[5]}
-        checkboxSelection
-        disableRowSelectionOnClick
         onRowClick={openUserDetails}
+        checkboxSelection
+        disableSelectionOnClick
       />
     </Box>
   );

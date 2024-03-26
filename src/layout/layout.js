@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import DataForm from '../pages/Form/Form';
 import Products from '../pages/Products/Products';
 import DataTable from '../pages/Home/Home';
@@ -11,16 +11,14 @@ const Layout = () => {
 
   return (
       <>
-        <Router>
             <Header />
-            <Box component="main" sx={{ p: 10 }} >
+            <Box component="main" sx={{ p: 6 }} >
                 <Routes>
                     <Route exact path="/" element={<DataTable />} />
                     <Route path="/form" element={<DataForm />} />
                     <Route path="/products" element={<Products />} />
                 </Routes>
             </Box>
-        </Router>
       </>
   );
 };
