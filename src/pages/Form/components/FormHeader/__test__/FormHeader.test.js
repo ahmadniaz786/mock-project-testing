@@ -5,6 +5,7 @@ import FormHeader from "../FormHeader";
 describe("Form Header Component", () => {
   const handleBackMock = jest.fn();
   const handleNextMock = jest.fn();
+  const handleSubmitMock = jest.fn();
 
   test("will render without crashing", () => {
     render(
@@ -96,6 +97,26 @@ describe("Form Header Component", () => {
     const submitButton = screen.getByTestId("submit-button");
     expect(nextButton).not.toBeInTheDocument();
     expect(submitButton).toBeInTheDocument();
+  });
+
+  test("will check the submit button is working properly", () => {
+    render(
+      <div>
+        <FormHeader
+          loading={false}
+          handleBack={handleBackMock}
+          handleNext={handleNextMock}
+          handleSubmit={handleSubmitMock}
+          activeStep={3}
+          steps={["step1", "step2", "step3", "step4"]}
+        />
+      </div>
+    );
+
+    const submitButton = screen.getByTestId("submit-button");
+
+    fireEvent.click(submitButton);
+    expect(handleSubmitMock).toHaveBeenCalledTimes(1);
   });
 
   test("will check if handleNext function works when clicked", () => {

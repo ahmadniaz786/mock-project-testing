@@ -21,6 +21,7 @@ const Step4 = (props) => {
     handleBack,
     handleNext,
     disableForm,
+    handleSubmit,
   } = props;
 
   const formik = useFormik({
@@ -65,6 +66,7 @@ const Step4 = (props) => {
         handleBack={handleBackClick}
         handleNext={handleNextClick}
         activeStep={activeStep}
+        handleSubmit={handleSubmit}
         title={"Step 4"}
         steps={steps}
       />

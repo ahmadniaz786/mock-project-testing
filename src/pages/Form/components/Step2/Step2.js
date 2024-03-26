@@ -16,8 +16,15 @@ import FormHeader from "../FormHeader/FormHeader";
 import { useValidationSchema, useInitialValues } from "./utils";
 
 const Step2 = (props) => {
-  const { loading, submitLoading, steps, activeStep, handleBack, handleNext } =
-    props;
+  const {
+    loading,
+    submitLoading,
+    steps,
+    activeStep,
+    handleBack,
+    handleNext,
+    handleSubmit,
+  } = props;
 
   const formik = useFormik({
     initialValues: useInitialValues(),
@@ -51,6 +58,7 @@ const Step2 = (props) => {
         handleBack={handleBackClick}
         handleNext={handleNextClick}
         activeStep={activeStep}
+        handleSubmit={handleSubmit}
         title={"Step 2"}
         steps={steps}
       />

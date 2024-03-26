@@ -157,12 +157,15 @@ const DataForm = () => {
   };
 
   const handleSubmit = () => {
+    setActiveStep((prevStep) => prevStep + 1);
     console.log("SubmitTrigger");
   };
 
   const getComponentName = () => {
     return activeForm;
   };
+
+  console.log(activeStep, stepsArray.length, "step");
 
   return (
     <Box pt={1}>
