@@ -72,8 +72,8 @@ const Step3 = (props) => {
       />
       <Box sx={{ p: 2, pt: 3, pointerEvents: submitLoading ? "none" : "auto" }}>
         <form data-testid="form">
-          <Grid container spacing={2}>
-            <Grid xs={6}>
+          <Grid container spacing={2} justifyContent="space-around">
+            <Grid xs={5} mt={3}>
               <InputField
                 formik={formik}
                 name="COMMERCIAL_NAME_LINE_1_A"
@@ -83,7 +83,7 @@ const Step3 = (props) => {
                 disabled={disableForm}
               />
             </Grid>
-            <Grid xs={6}>
+            <Grid xs={5} mt={3}>
               <InputField
                 formik={formik}
                 name="COMMERCIAL_NAME_LINE_2_A"
@@ -93,7 +93,7 @@ const Step3 = (props) => {
                 disabled={true}
               />
             </Grid>
-            <Grid xs={6}>
+            <Grid xs={5} mt={3}>
               <InputField
                 formik={formik}
                 name="COMMERCIAL_NAME_LINE_1_E"
@@ -102,7 +102,7 @@ const Step3 = (props) => {
                 label="COMMERCIAL_NAME_LINE_1_E"
               />
             </Grid>
-            <Grid xs={6}>
+            <Grid xs={5} mt={3}>
               <InputField
                 formik={formik}
                 name="COMMERCIAL_NAME_LINE_2_E"
@@ -111,7 +111,7 @@ const Step3 = (props) => {
                 label="COMMERCIAL_NAME_LINE_2_E"
               />
             </Grid>
-            <Grid xs={6}>
+            <Grid xs={5} mt={3}>
               <AutoCompleteField
                 name="ENTITY_NATIONALITY"
                 formik={formik}
@@ -121,7 +121,7 @@ const Step3 = (props) => {
                 options={MovieOptions}
               />
             </Grid>
-            <Grid xs={6}>
+            <Grid xs={5} mt={3}>
               <AutoCompleteField
                 name="PRIMARY_LANGUAGE"
                 formik={formik}
@@ -131,7 +131,7 @@ const Step3 = (props) => {
                 options={countryOptions}
               />
             </Grid>
-            <Grid xs={6}>
+            <Grid xs={5} mt={3}>
               <AutoCompleteField
                 name="STATEMENT_LANGUAGE"
                 formik={formik}
@@ -141,7 +141,7 @@ const Step3 = (props) => {
                 options={countryOptions}
               />
             </Grid>
-            <Grid xs={6}>
+            <Grid xs={5} mt={3}>
               <AutoCompleteField
                 name="REGISTRATION_ISSUER"
                 formik={formik}
@@ -151,7 +151,7 @@ const Step3 = (props) => {
                 options={countryOptions}
               />
             </Grid>
-            <Grid xs={6}>
+            <Grid xs={5} mt={3}>
               <InputField
                 formik={formik}
                 name="MAXIMUM_CEILING_AMOUNT"
@@ -160,7 +160,7 @@ const Step3 = (props) => {
                 label="MAXIMUM_CEILING_AMOUNT"
               />
             </Grid>
-            {/* <Grid xs={6}>
+            {/* <Grid xs={5} mt={3}>
                             <DatePickerField
                                 formik={formik}
                                 name='Project Start Date'
@@ -170,7 +170,7 @@ const Step3 = (props) => {
                                 maxDate={new Date()}
                             />
                         </Grid > */}
-            <Grid xs={6}>
+            <Grid xs={5} mt={3}>
               <InputField
                 formik={formik}
                 name="PROJECT_DURATION"
@@ -180,7 +180,7 @@ const Step3 = (props) => {
                 disabled={disableForm}
               />
             </Grid>
-            <Grid xs={6}>
+            <Grid xs={5} mt={3}>
               <InputField
                 formik={formik}
                 name="CR_ISSUANCE_AUTHORITY"
@@ -190,7 +190,7 @@ const Step3 = (props) => {
                 disabled={disableForm}
               />
             </Grid>
-            {/* <Grid xs={6}>
+            {/* <Grid xs={5} mt={3}>
                             <DatePickerField
                                 formik={formik}
                                 name='Delete Date'
@@ -208,7 +208,7 @@ const Step3 = (props) => {
                                 }
                             />
                         </Grid > */}
-            <Grid xs={6}>
+            <Grid xs={5} mt={3}>
               <InputField
                 formik={formik}
                 name="REASON_OF_DELETE"
