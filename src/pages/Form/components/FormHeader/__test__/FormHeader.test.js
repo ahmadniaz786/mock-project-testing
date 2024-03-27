@@ -137,7 +137,7 @@ describe("Form Header Component", () => {
     expect(handleNextMock).toHaveBeenCalled();
   });
 
-  test("will check if handleNext function works when clicked", () => {
+  test("will check if handleBack function works when clicked", () => {
     render(
       <div>
         <FormHeader
