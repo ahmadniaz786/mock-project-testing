@@ -36,7 +36,31 @@ const Products = () => {
               }}
             >
               <Typography color="primary.main" fontWeight="bold">
-                    CORPORATE ACCOUNT OPENING
+                CORPORATE ACCOUNT OPENING
+              </Typography>
+              <Box mt={2}>{CorporateAccountOpening()}</Box>
+            </Item>
+          </ButtonBase>
+        </Grid>
+
+        <Grid item xs={3} sm={4} md={3}>
+          <ButtonBase
+            sx={{ width: "100%" }}
+            onClick={() => {
+              navigate("/dashboard");
+            }}
+          >
+            <Item
+              sx={{
+                height: "200px",
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}
+            >
+              <Typography color="primary.main" fontWeight="bold">
+                DASHBOARD
               </Typography>
               <Box mt={2}>{CorporateAccountOpening()}</Box>
             </Item>

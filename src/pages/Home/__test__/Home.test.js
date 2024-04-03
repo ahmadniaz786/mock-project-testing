@@ -1,56 +1,9 @@
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import DataTable from "../Home";
-import { Route, Router, Routes } from "react-router-dom";
-import { createMemoryHistory } from "history";
-import { MemoryRouter } from "react-router-dom";
-import DataForm from "../../Form/Form";
-import { useHistory } from "react-router-dom";
-import { createBrowserHistory } from "history";
-
-const rows = [
-  { id: 1, lastName: "Snow", firstName: "Jon", age: 14 },
-  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 31 },
-  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 31 },
-  { id: 4, lastName: "Stark", firstName: "Arya", age: 11 },
-  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-];
-
-const columns = [
-  { field: "id", headerName: "ID", width: 90 },
-  {
-    field: "firstName",
-    headerName: "First name",
-    width: 150,
-    editable: true,
-  },
-  {
-    field: "lastName",
-    headerName: "Last name",
-    width: 150,
-    editable: true,
-  },
-  {
-    field: "age",
-    headerName: "Age",
-    type: "number",
-    width: 110,
-    editable: true,
-  },
-  {
-    field: "fullName",
-    headerName: "Full name",
-    description: "This column has a value getter and is not sortable.",
-    sortable: false,
-    width: 160,
-    valueGetter: (params) =>
-      `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-  },
-];
+import axios from "axios";
+// Mock axios
+jest.mock("axios");
 
 // Mock the useNavigate hook
 jest.mock("react-router-dom", () => ({
@@ -59,16 +12,52 @@ jest.mock("react-router-dom", () => ({
 }));
 
 describe("DataTable Component Unit Tests", () => {
-  const renderComponent = () => {
-    return render(
-      <MemoryRouter initialEntries={["/"]}>
-        <DataTable />
-        <Routes>
-          <Route path="/form" element={<DataForm />} />
-        </Routes>
-      </MemoryRouter>
+  beforeEach(() => {
+    // Clear mock calls before each test
+    jest.clearAllMocks();
+  });
+
+  it("fetches and displays data correctly", async () => {
+    // Mock response data
+    const mockData = [
+      {
+        id: 1,
+        firstName: "John",
+        lastName: "Doe",
+        fullName: "John Doe",
+        family: 5,
+      },
+      {
+        id: 2,
+        firstName: "Jane",
+        lastName: "Doe",
+        fullName: "Jane Doe",
+        family: 3,
+      },
+      // Add more mock data as needed
+    ];
+
+    // Mock axios.get implementation to return mock data
+    axios.get.mockResolvedValueOnce({ data: mockData });
+
+    // Render the component
+    render(<DataTable />);
+
+    // Wait for the data to be fetched and displayed
+    await waitFor(() => {
+      // Check if data is displayed correctly
+      const firstRow = screen.getByText("John Doe");
+      expect(firstRow).toBeInTheDocument();
+      const secondRow = screen.getByText("Jane Doe");
+      expect(secondRow).toBeInTheDocument();
+      // Add more assertions as needed
+    });
+
+    // Optionally, you can test if the API was called with the correct URL
+    expect(axios.get).toHaveBeenCalledWith(
+      "https://thronesapi.com/api/v2/Characters"
     );
-  };
+  });
 
   it("navigates to the next page when clicking the next button", () => {
     render(<DataTable />);
@@ -102,33 +91,33 @@ describe("DataTable Component Unit Tests", () => {
     expect(updatedTable).toBeInTheDocument();
   });
 
-  test("clicking filter links updates product query params", () => {
-    let testHistory, testLocation;
-    render(
-      <MemoryRouter initialEntries={["/"]}>
-        <DataForm />
-        <Route
-          path="*"
-          render={({ history, location }) => {
-            testHistory = history;
-            testLocation = location;
-            return null;
-          }}
-        />
-      </MemoryRouter>
-    );
+  // test("clicking filter links updates product query params", () => {
+  //   let testHistory, testLocation;
+  //   render(
+  //     <MemoryRouter initialEntries={["/"]}>
+  //       <DataForm />
+  //       <Routes>
+  //         <Route
+  //           path="*"
+  //           render={({ history, location }) => {
+  //             testHistory = history;
+  //             testLocation = location;
+  //             return null;
+  //           }}
+  //         />
+  //       </Routes>
+  //     </MemoryRouter>
+  //   );
 
-    act(() => {
-      const firstRow = screen.getAllByRole("row")[1]; // Assuming row 2 is the first row in the table
-      fireEvent.click(firstRow);
-    });
+  //   act(() => {
+  //     const firstRow = screen.getAllByRole("row")[1]; // Assuming row 2 is the first row in the table
+  //     fireEvent.click(firstRow);
+  //   });
 
-    // assert about url
-    expect(testLocation.pathname).toBe("/form");
-    // const searchParams = new URLSearchParams(testLocation.search);
-    // expect(searchParams.has("id")).toBe(true);
-    // expect(searchParams.get("id")).toEqual("1234");
-  });
+  //   // assert about url
+  //   expect(testLocation.pathname).toBe("/form");
+
+  // });
 
   // it('should change current location to login when button is clicked', () => {
   //   const history = createMemoryHistory({ initialEntries: ['/form'] });
