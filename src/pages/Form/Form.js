@@ -165,10 +165,8 @@ const DataForm = () => {
     return activeForm;
   };
 
-  console.log(activeStep, stepsArray.length, "step");
-
   return (
-    <Box pt={1}>
+    <Box pt={1} data-testid={"form-page"}>
       <Grid item container sm={12} pt={2}>
         <Grid item xs={4} sm={3} md={2} sx={{ pr: 2, height: "auto" }}>
           {loading ? (

@@ -1,8 +1,7 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
@@ -38,12 +37,15 @@ const columns = [
 ];
 
 export default function DataTable() {
+  const location = useLocation();
   const navigate = useNavigate();
   const [rows, setRows] = React.useState([]);
 
   const getData = async () => {
-    const res = await axios.get("https://thronesapi.com/api/v2/Characters");
-    setRows(res.data);
+    fetch("https://thronesapi.com/api/v2/Characters")
+      .then((res) => res.json())
+      .then((data) => setRows(data))
+      .catch((err) => console.log(err));
   };
 
   React.useEffect(() => {
@@ -64,7 +66,7 @@ export default function DataTable() {
       }}
     >
       <DataGrid
-        data-testid="data-form"
+        data-testid="data-grid"
         rows={rows}
         columns={columns}
         initialState={{
